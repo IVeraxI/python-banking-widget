@@ -9,7 +9,7 @@ def filter_by_state(operations: list[dict], state: str = "EXECUTED") -> list[dic
 
 def get_date_key(op: dict) -> str:
     """Вспомогательная функция для получения даты."""
-    return op.get("date", "")
+    return str(op.get("date", ""))
 
 
 def sort_by_date(operations: list[dict], reverse: bool = True) -> list[dict]:
