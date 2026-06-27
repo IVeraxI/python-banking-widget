@@ -30,3 +30,24 @@ poetry install
 poetry run flake8 src/
 poetry run mypy src/
 ```
+## Тестирование
+
+Для запуска тестов используется библиотека `pytest`.
+
+### Запуск тестов
+
+```bash
+python -m pytest tests/ -v
+```
+
+### Запуск с отчётом покрытия
+
+```bash
+python -m pytest --cov=src --cov-report=html -v
+```
+
+Отчёт покрытия сохраняется в папку `htmlcov/`.
+
+### Покрытие кода
+
+Покрытие тестами составляет более 80%.
