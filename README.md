@@ -30,3 +30,16 @@ poetry install
 poetry run flake8 src/
 poetry run mypy src/
 ```
+## Модуль generators
+
+Функции для потоковой обработки больших объёмов транзакций без загрузки всех данных в память сразу.
+
+- `filter_by_currency(transactions, currency_code)` — возвращает итератор транзакций с заданной валютой.
+- `transaction_descriptions(transactions)` — генератор описаний транзакций по одному.
+- `card_number_generator(start, stop)` — генератор номеров карт в диапазоне в формате `XXXX XXXX XXXX XXXX`.
+
+Пример:
+\`\`\`python
+usd_transactions = filter_by_currency(transactions, "USD")
+next(usd_transactions)
+\`\`\`
