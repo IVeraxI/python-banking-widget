@@ -43,3 +43,25 @@ poetry run mypy src/
 usd_transactions = filter_by_currency(transactions, "USD")
 next(usd_transactions)
 \`\`\`
+
+## Тестирование
+
+Для запуска тестов используется библиотека `pytest`.
+
+### Запуск тестов
+
+```bash
+python -m pytest tests/ -v
+```
+
+### Запуск с отчётом покрытия
+
+```bash
+python -m pytest --cov=src --cov-report=html -v
+```
+
+Отчёт покрытия сохраняется в папку `htmlcov/`.
+
+### Покрытие кода
+
+Покрытие тестами составляет более 80%.
