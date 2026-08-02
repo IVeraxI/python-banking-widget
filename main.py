@@ -10,14 +10,15 @@ def print_transaction(transaction: dict) -> None:
     description = transaction.get("description", "")
 
     if transaction.get("from"):
-        accounts_line = f"{mask_account_card(transaction['from'])} -> {mask_account_card(transaction['to'])}"
+        accounts_line = f"{mask_account_card(transaction['from'])} -> {mask_account_card(transaction.get('to', ''))}"
     else:
-        accounts_line = mask_account_card(transaction["to", ""])
+        accounts_line = mask_account_card(transaction.get("to", ""))
 
-    amount = transaction["operationAmount"]["amount"]
-    currency_name = transaction["operationAmount"]["currency"]["name"]
+    operation_amount = transaction.get("operationAmount", {})
+    amount = operation_amount.get("amount", "")
+    currency_name = operation_amount.get("currency", {}).get("name", "")
 
-    print(f"{date} -> {description}")
+    print(f"{date} {description}")
     print(accounts_line)
     print(f"Сумма: {amount} {currency_name}")
     print()
