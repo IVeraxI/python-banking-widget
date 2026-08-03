@@ -6,17 +6,22 @@ from src.widget import get_date, mask_account_card
 
 def print_transaction(transaction: dict) -> None:
     """Печатает одну транзакцию в требуемом формате."""
-    date = get_date(transaction.get("date", ""))
+    date = get_date(str(transaction.get("date", "")))
     description = transaction.get("description", "")
 
-    if transaction.get("from"):
-        accounts_line = f"{mask_account_card(transaction['from'])} -> {mask_account_card(transaction.get('to', ''))}"
+    from_field = transaction.get("from")
+    if isinstance(from_field, str) and from_field.strip():
+        accounts_line = f"{mask_account_card(from_field)} -> {mask_account_card(transaction.get('to', ''))}"
     else:
         accounts_line = mask_account_card(transaction.get("to", ""))
 
-    operation_amount = transaction.get("operationAmount", {})
-    amount = operation_amount.get("amount", "")
-    currency_name = operation_amount.get("currency", {}).get("name", "")
+    operation_amount = transaction.get("operationAmount")
+    if isinstance(operation_amount, dict):
+        amount = operation_amount.get("amount", "")
+        currency_name = operation_amount.get("currency", {}).get("name", "")
+    else:
+        amount = transaction.get("amount", "")
+        currency_name = transaction.get("currency_name", "")
 
     print(f"{date} {description}")
     print(accounts_line)
